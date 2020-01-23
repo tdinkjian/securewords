@@ -44,14 +44,13 @@ def get_longest_word(word_list):
             elif len(word) == len(longest_word[0]):
                 longest_word.append(word)
         else:
-            word_list.remove(word)
-            print(f'{word} was removed for containing invalid characters')
-            if not word_list:
-                raise Exception("The file only contains invalid words")
-
+            print(f'{word} Is an invalid word, it will not be considered')
 
     if len(longest_word) > 1:
         raise Exception("This file contains multiple longest words")
+    if len(longest_word[0]) == 0:
+        raise Exception("The file contains no valid words")
+
     return longest_word[0]
 
 
@@ -59,7 +58,7 @@ def validate_word(word):
     """
     This function contains the validation of words. Any word containing a
     character that is not a-z or capital A-Z will be considered invalid.
-    This function has been separated in case future validation is needed
+    This function has been separated if future validation is needed
 
     :param word: a string to validate
     :return: boolean
@@ -68,6 +67,27 @@ def validate_word(word):
     return validated
 
 
-wordlist = get_all_words_from_file('examples\\emptyfile.txt')
-longestword = get_longest_word(wordlist)
-print(longestword[::-1])
+def main():
+    """
+    Main function, argparse is used to get the file path.
+    The application will assume the file is in the securewords directory.
+    This is mostly done to prevent having to put full paths to files.
+    """
+    default_path = os.path.join('examples', 'example.txt')
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--filepath',
+        default=default_path,
+        help='The path to the file to to check, must be placed in'
+             'securewords dir')
+    args = parser.parse_args()
+
+    wordlist = get_all_words_from_file(args.filepath)
+    longestword = get_longest_word(wordlist)
+
+    print(longestword)
+    print(longestword[::-1])
+
+
+if __name__ == "__main__":
+    main()

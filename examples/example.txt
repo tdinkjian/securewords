@@ -1,5 +1,5 @@
-a a
-ab db
+a
+ab
 abc
 abcd
 abcde
