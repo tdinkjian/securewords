@@ -85,8 +85,8 @@ def main():
     wordlist = get_all_words_from_file(args.filepath)
     longestword = get_longest_word(wordlist)
 
-    print(longestword)
-    print(longestword[::-1])
+    print(f'The longest word is: {longestword}')
+    print(f'The longest word transposed is: {longestword[::-1]}')
 
 
 if __name__ == "__main__":
