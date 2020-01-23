@@ -2,8 +2,7 @@ import argparse
 import re
 import os
 
-
-def get_all_words_from_file(file_path):
+def get_words_from_file(file_path):
     """
     Gets all words from the specified file. The delimiter between words will be
      a new line, and whitespace between each new line. File paths of example
@@ -67,6 +66,16 @@ def validate_word(word):
     return validated
 
 
+def transpose_word(word):
+    """
+    Takes a word and transposes it.
+
+    :param word: string to transpose
+    :return: transposed word as a string
+    """
+    return  word[::-1]
+
+
 def main():
     """
     Main function, argparse is used to get the file path.
@@ -82,11 +91,11 @@ def main():
              'securewords dir')
     args = parser.parse_args()
 
-    wordlist = get_all_words_from_file(args.filepath)
+    wordlist = get_words_from_file(args.filepath)
     longestword = get_longest_word(wordlist)
-
+    transposedword = transpose_word(longestword)
     print(f'The longest word is: {longestword}')
-    print(f'The longest word transposed is: {longestword[::-1]}')
+    print(f'The longest word transposed is: {transposedword}')
 
 
 if __name__ == "__main__":
