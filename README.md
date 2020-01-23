@@ -10,3 +10,8 @@ The securewords application, only accepts one input. The path to the file must b
 To run the script simply run the script. If no file is provided the default example.txt will be used:
 
 `python securewords.py --filepath <path_to_file>`
+
+### Tests
+To run the tests call the test_secure_words as a python file
+
+`python test_secure_words`

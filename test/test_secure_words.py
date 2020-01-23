@@ -1,6 +1,11 @@
+import os
+import sys
 import unittest
-from securewords import get_words_from_file, get_longest_word, validate_word
-from securewords import main, transpose_word
+dir_path = os.path.dirname(os.path.realpath(__file__))
+path = os.path.join(dir_path, "..")
+sys.path.append(path)
+
+from securewords.securewords import *
 
 
 class TestPositiveSecureWords(unittest.TestCase):
@@ -9,24 +14,26 @@ class TestPositiveSecureWords(unittest.TestCase):
         """
         A basic file with valid words separated by new lines
         """
-        word_list = get_words_from_file(file_path='examples\example.txt')
+        file_path = os.path.join('..', 'examples', 'example.txt')
+        word_list = get_words_from_file(file_path=file_path)
         self.assertEqual(word_list, ['a', 'ab', 'abc', 'abcd', 'abcde'])
 
     def test_file_with_spaces(self):
         """
         A file with new line and whitespace separating words
         """
-        word_list = get_words_from_file(
-            file_path='examples\\file_with_spaces.txt')
+        file_path = os.path.join('../examples', 'file_with_spaces.txt')
+        word_list = get_words_from_file(file_path=file_path)
         self.assertEqual(word_list, ['a', 'b', 'cd', 'cd', 'abcde', 'abc'])
 
     def test_empty_file_throws_exception(self):
         """
         A file with no words will throw an exception
         """
+        file_path = os.path.join('..', 'examples', 'emptyfile.txt')
         self.assertRaises(
             Exception,
-            get_words_from_file, 'examples\emptyfile.txt')
+            get_words_from_file, file_path)
 
     def test_get_longest_word(self):
         """
@@ -83,7 +90,7 @@ class TestPositiveSecureWords(unittest.TestCase):
 
     def test_functional(self):
         """
-        Tests the entire script and output.
+        Tests the entire script
         """
         main()
 

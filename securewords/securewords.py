@@ -2,6 +2,7 @@ import argparse
 import re
 import os
 
+
 def get_words_from_file(file_path):
     """
     Gets all words from the specified file. The delimiter between words will be
@@ -73,7 +74,7 @@ def transpose_word(word):
     :param word: string to transpose
     :return: transposed word as a string
     """
-    return  word[::-1]
+    return word[::-1]
 
 
 def main():
@@ -82,7 +83,7 @@ def main():
     The application will assume the file is in the securewords directory.
     This is mostly done to prevent having to put full paths to files.
     """
-    default_path = os.path.join('examples', 'example.txt')
+    default_path = os.path.join('../examples', 'example.txt')
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--filepath',
