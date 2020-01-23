@@ -1,5 +1,9 @@
 import os
+import sys
 import unittest
+dir_path = os.path.dirname(os.path.realpath(__file__))
+path = os.path.join(dir_path, "..")
+sys.path.append(path)
 
 from securewords.securewords import *
 
@@ -10,7 +14,7 @@ class TestPositiveSecureWords(unittest.TestCase):
         """
         A basic file with valid words separated by new lines
         """
-        file_path = os.path.join('../examples', 'example.txt')
+        file_path = os.path.join('..', 'examples', 'example.txt')
         word_list = get_words_from_file(file_path=file_path)
         self.assertEqual(word_list, ['a', 'ab', 'abc', 'abcd', 'abcde'])
 
@@ -18,7 +22,7 @@ class TestPositiveSecureWords(unittest.TestCase):
         """
         A file with new line and whitespace separating words
         """
-        file_path = os.path.join('../examples', 'example.txt')
+        file_path = os.path.join('../examples', 'file_with_spaces.txt')
         word_list = get_words_from_file(file_path=file_path)
         self.assertEqual(word_list, ['a', 'b', 'cd', 'cd', 'abcde', 'abc'])
 
@@ -26,7 +30,7 @@ class TestPositiveSecureWords(unittest.TestCase):
         """
         A file with no words will throw an exception
         """
-        file_path = os.path.join('../examples', 'example.txt')
+        file_path = os.path.join('..', 'examples', 'emptyfile.txt')
         self.assertRaises(
             Exception,
             get_words_from_file, file_path)
@@ -44,7 +48,7 @@ class TestPositiveSecureWords(unittest.TestCase):
         Order should not impact the ability to get the largest word
         """
         word_list = ['a', 'abcde', 'ab', 'abc', 'abcd']
-        longest_word = get_words_from_file(word_list)
+        longest_word = get_longest_word(word_list)
         self.assertEqual(longest_word, 'abcde')
 
     def test_all_invalid_words(self):
@@ -81,7 +85,7 @@ class TestPositiveSecureWords(unittest.TestCase):
 
     def test_tranpose_word(self):
         word = 'test'
-        transposed_word = validate_word(word)
+        transposed_word = transpose_word(word)
         self.assertEqual(transposed_word, 'tset')
 
     def test_functional(self):
